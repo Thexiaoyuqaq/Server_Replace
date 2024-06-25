@@ -20,13 +20,12 @@ $serverGroups = array(
 
 if (isset($serverGroups['servers'][$serverName])) {
     $serverNameResult = $serverGroups['servers'][$serverName];
-    $response = json_encode(array("code" => 200, "name" => $serverNameResult, "message" => "获取成功"));
-    http_response_code(200);
+    $response = array("code" => 200, "name" => $serverNameResult, "message" => "获取成功");
 } else {
-    $response = json_encode(array("code" => 404, "message" => "未知服务器"));
-    http_response_code(404);
+    $response = array("code" => 404, "message" => "未知服务器");
 }
 
 header('Content-Type: application/json; charset=UTF-8');
-echo $response;
+http_response_code($response["code"]);
+echo json_encode($response);
 ?>
